@@ -1,0 +1,29 @@
+---
+- name: Make nginx.service.d
+  file:
+    path: /etc/systemd/system/nginx.service.d
+    state: directory
+  become: yes
+
+- name: Make override.conf on nginx.service.d
+  file:
+    path: /etc/systemd/system/nginx.service.d/override.conf
+    state: touch
+  become: yes
+
+- name: Print line 1 of the fix
+  lineinfile:
+    path: /etc/systemd/system/nginx.service.d/override.conf
+    line: '[Service]'
+  become: yes
+
+- name: Print line 2 of the fix
+  lineinfile:
+    path: /etc/systemd/system/nginx.service.d/override.conf
+    line: ExecStartPost=/bin/sleep 0.1
+  become: yes
+
+- name: Reload the daemon
+  systemd:
+    daemon_reload: yes
+  become: yes

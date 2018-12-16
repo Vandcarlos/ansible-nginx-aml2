@@ -1,0 +1,23 @@
+---
+sites:
+  # - map: 'blog.test'
+    # to: '/home/ec2-user/Code/test/public'
+    # ssl:
+    #   certificate: /etc/ssl/test/test.crt
+    #   key: /etc/ssl/test/test.key
+    # php: '7.2'
+    # cache:
+    #   - extensions:
+    #       - js
+    #       - html
+    #     time: 35d
+    #   - extensions:
+    #       - svg
+    #       - png
+    #     time: 350d
+
+php_fpm_listeners:
+  - version: '7.2'
+    listener: '127.0.0.1:9000'
+  # - version: '7.1'
+  #   listener: '127.0.0.1:9001'

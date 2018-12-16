@@ -1,0 +1,39 @@
+server {
+    listen 80;
+    server_name .{{ server_name }};
+    root {{ directory }};
+
+    index index.html index.htm index.php;
+
+    error_log  /var/log/nginx/{{ server_name }}-error.log error;
+
+    #Start cache policies
+{% for cache_policy in cache_policies %}
+
+    location ~* \.(
+        {%- for extension in cache_policy.extensions -%}
+            {{ extension }}
+            {%- if not loop.last -%} | {%- endif -%}
+        {%- endfor -%}
+    )$ {
+        expires {{ cache_policy.time }};
+        add_header Cache-Control "public, no-transform";
+    }
+{% endfor %}
+
+    #End cache policies
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        sendfile off;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass {{ php_fpm_listener }};
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
