@@ -48,7 +48,7 @@ galaxy_info:
   #   - 7
   #   - 99.99
   platforms:
-    - name: Amazon
+    - name: Amazon Linux
       versions:
         - 2
   galaxy_tags: []
