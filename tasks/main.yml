@@ -5,17 +5,17 @@
   args:
     creates: /usr/sbin/nginx
 
-- include_tasks: copy-files.yml
+- include_tasks: copy-conf-files.yml
 - include_tasks: create-paths.yml
 - include_tasks: pid-bug.yml
 - include_tasks: sites-loop.yml
   when: sites
 
-- name: Change lib nginx ownership to ec2-user
+- name: Change lib nginx ownership to "{{ nginx_user }}"
   file:
     path: /var/lib/nginx
-    owner: ec2-user
-    group: ec2-user
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_user }}"
     recurse: yes
   become: yes
 

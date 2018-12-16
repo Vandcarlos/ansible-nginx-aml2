@@ -16,11 +16,42 @@ sites:
   #         - png
   #       time: 350d
 
+nginx_user: ec2-user
+
 default_php_version: '7.2'
 
 php_fpm_listeners:
   - version: '7.2'
-    listener: 'unix:/run/php-fpm/www.sock'
-  #   listener: '127.0.0.1:9000'
+    # listener: 'unix:/run/php-fpm/www.sock'
+    listener: '127.0.0.1:9000'
   # - version: '7.1'
   #   listener: '127.0.0.1:9001'
+
+gzip_types:
+  - application/json
+  - application/javascript
+  - application/manifest+json
+  - application/rss+xml
+  - application/vnd.ms-fontobject
+  - application/x-font-opentype
+  - application/x-font-truetype
+  - application/x-font-ttf
+  - application/x-javascript
+  - application/xhtml+xml
+  - application/xml
+  - application/xml+rss
+  - font/eot
+  - font/opentype
+  - font/otf
+  - font/ttf
+  - image/svg+xml
+  - image/vnd.microsoft.icon
+  - image/x-icon
+  - text/css
+  - text/javascript
+  - text/plain
+  - text/vcard
+  - text/x-component
+  - text/xml
+  - application/octet-stream
+  - text/js
