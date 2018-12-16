@@ -22,9 +22,9 @@
   vars:
     server_name: "{{ item.map }}"
     directory: "{{ item.to }}"
-    php_version: "{{ item.php | default ('7.2')}}"
+    php_version: "{{ item.php | default ('7.2') }}"
     ssl: "{{ item.ssl | default (False) }}"
-    cache_policies: "{{ item.cache | default ()}}"
+    cache_policies: "{{ item.cache | default () }}"
   loop: "{{ sites }}"
 
 - name: Change lib nginx ownership to ec2-user
