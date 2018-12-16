@@ -2,7 +2,7 @@ galaxy_info:
   author: Vandcarlos Mouzinho Sandes Junior
   description: Task for install nginx on Amazon Linux 2
   company: ''
-  # role_name: nginx-aml2
+  role_name: nginx-aml2
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
