@@ -1,0 +1,9 @@
+---
+- name: Make sites path
+  file:
+    path: /etc/nginx/{{ item }}
+    state: directory
+  become: yes
+  with_items:
+    - sites-available
+    - sites-enabled

@@ -1,0 +1,9 @@
+---
+- include_tasks: site.yml
+  vars:
+    server_name: "{{ item.map }}"
+    directory: "{{ item.to }}"
+    php_version: "{{ item.php | default (default_php_version) }}"
+    ssl: "{{ item.ssl | default (False) }}"
+    cache_policies: "{{ item.cache | default () }}"
+  loop: "{{ sites }}"

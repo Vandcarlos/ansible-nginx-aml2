@@ -5,27 +5,11 @@
   args:
     creates: /usr/sbin/nginx
 
-- name: create nginx paths
-  file:
-    path: /etc/nginx/{{ item }}
-    state: directory
-  become: yes
-  with_items:
-    - sites-available
-    - sites-enabled
-
-- include: copy_files.yml
-- include: code_path.yml
-- include: pid_bug.yml
-
-- include_tasks: hosts.yml
-  vars:
-    server_name: "{{ item.map }}"
-    directory: "{{ item.to }}"
-    php_version: "{{ item.php | default ('7.2') }}"
-    ssl: "{{ item.ssl | default (False) }}"
-    cache_policies: "{{ item.cache | default () }}"
-  loop: "{{ sites }}"
+- include_tasks: copy-files.yml
+- include_tasks: code-path.yml
+- include_tasks: pid-bug.yml
+- include_tasks: sites-loop.yml
+  when: sites
 
 - name: Change lib nginx ownership to ec2-user
   file:
