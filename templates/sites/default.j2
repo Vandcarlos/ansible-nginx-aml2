@@ -24,7 +24,7 @@ server {
     #End cache policies
 
     location / {
-        try_files $uri $uri/ /index.php?$query_string;
+        try_files $uri $uri/ /index.php?$query_string @rewrites;
         sendfile off;
     }
 
@@ -35,5 +35,9 @@ server {
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
+    }
+    
+    location @rewrites {
+        rewrite ^.*$ /index.html last;
     }
 }
