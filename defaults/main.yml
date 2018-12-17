@@ -6,6 +6,7 @@ sites:
   #     certificate: /etc/ssl/test/test.crt
   #     key: /etc/ssl/test/test.key
   #   php: '7.2'
+  #   spa: True
   #   cache:
   #     - extensions:
   #         - js

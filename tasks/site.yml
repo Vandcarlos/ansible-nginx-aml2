@@ -1,7 +1,7 @@
 ---
 - debug:
-    msg: 'Site: "{{ server_name  }}"'
-    
+    msg: "{{ server_name  }}"
+
 - name: Set php fpm listener
   set_fact:
     php_fpm_listener: "{{ current.listener }}"

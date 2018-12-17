@@ -58,8 +58,18 @@ server {
 
     #End cache policies
 
+{% if spa %}
     location / {
-        try_files $uri $uri/ /index.php?$query_string @rewrites;
+        try_files $uri $uri/ @rewrites;
+        sendfile off;
+    }
+
+    location @rewrites {
+        rewrite ^.*$ /index.html last;
+    }
+{% else %}
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
         sendfile off;
     }
 
@@ -71,10 +81,7 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
-    
-    location @rewrites {
-        rewrite ^.*$ /index.html last;
-    }
+{% endif %}
 
     location ~ /\.ht {
         deny all;

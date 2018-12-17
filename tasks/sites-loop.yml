@@ -6,4 +6,5 @@
     php_version: "{{ item.php | default (default_php_version) }}"
     ssl: "{{ item.ssl | default (False) }}"
     cache_policies: "{{ item.cache | default () }}"
+    spa: "{{ item.spa | default (False) }}"
   loop: "{{ sites }}"
